@@ -1,6 +1,16 @@
-// aqui exportaras las funciones que necesites
+const createUser = (e) => {
+  e.preventDefault();
+  const emailInputValue = document.getElementById('email').value;
+  const passwordInputValue = document.getElementById('password').value;
+
+  console.log(emailInputValue, passwordInputValue);
+  // Crear usuario...
+};
 
 export const myFunction = () => {
-  // aqui tu codigo
-  console.log('Hola mundo!');
+  // Inicializar Firebase
+
+  document
+    .getElementById('registrationButton')
+    .addEventListener('click', createUser);
 };

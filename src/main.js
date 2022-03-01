@@ -1,4 +1,5 @@
-import { myFunction } from './lib/index.js';
+import { createUser } from './lib/firebase-auth.js';
+import { firebaseConfig, initializeApp } from './lib/firebase-init.js';
 
 const form = document.createElement('form');
 form.innerHTML = `
@@ -9,6 +10,16 @@ form.innerHTML = `
   <input type="submit" id="registrationButton" value="Registrarse">
 `;
 
-document.querySelector('#root').appendChild(form);
+window.addEventListener('load', () => {
+  initializeApp(firebaseConfig);
 
-myFunction();
+  form
+    .querySelector('#registrationButton')
+    .addEventListener('click', async (e) => {
+      e.preventDefault();
+      const emailInputValue = form.querySelector('#email').value;
+      const passwordInputValue = form.querySelector('#password').value;
+      await createUser(emailInputValue, passwordInputValue);
+    });
+  document.querySelector('#root').appendChild(form);
+});
